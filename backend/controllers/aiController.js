@@ -1,6 +1,6 @@
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import dotenv from "dotenv";
-import AiTask from "../models/AiTask.js"; // You'll need to create this model
+import AiTask from "../models/aiTask.js"; // You'll need to create this model
 
 dotenv.config();
 
