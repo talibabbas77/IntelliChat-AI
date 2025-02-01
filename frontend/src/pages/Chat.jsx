@@ -2,7 +2,6 @@ import React, { useState, useEffect, useRef } from "react";
 import { Send, Loader, Copy, Edit, Trash2Icon, Bot } from "lucide-react";
 import Sidebar from "../components/Sidebar";
 import { marked } from "marked";
-import axiosInstance from "../utils/axiosInstance";
 
 const Chat = () => {
   const [message, setMessage] = useState("");
@@ -132,15 +131,23 @@ const Chat = () => {
       ];
       setChatHistory(newChatHistory);
 
-      const response = await axiosInstance.post("/api/chat/send", {
-        message,
-      });
+      const response = await fetch(
+        `${import.meta.env.VITE_BASE_URL}/api/chat/send`,
+        {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ message }),
+        }
+      );
 
-      if (!response.data || !response.data.body) {
-        throw new Error("Invalid response from server");
+      if (!response.ok) {
+        throw new Error("Failed to send message");
       }
 
-      const reader = response.data.body.getReader();
+      const reader = response.body.getReader();
       let decoder = new TextDecoder();
       let fullResponse = "";
 
