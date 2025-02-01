@@ -1,6 +1,6 @@
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import dotenv from "dotenv";
-import AiTask from "../models/aiTask.js"; // You'll need to create this model
+import AiTask from "../models/aiTask.js";
 
 dotenv.config();
 
@@ -91,9 +91,9 @@ export const customBotQuery = async (req, res) => {
 
     const prompt = `You are a helpful AI assistant. Provide a comprehensive and thoughtful response to the following query:
   
-  ${query}
+${query}
   
-  Response:`;
+Response:`;
 
     const result = await model.generateContent(prompt);
     const response = result.response.text();
