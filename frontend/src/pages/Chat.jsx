@@ -136,6 +136,10 @@ const Chat = () => {
         message,
       });
 
+      if (!response.data || !response.data.body) {
+        throw new Error("Invalid response from server");
+      }
+
       const reader = response.data.body.getReader();
       let decoder = new TextDecoder();
       let fullResponse = "";
