@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import {
   Loader2,
@@ -12,6 +11,7 @@ import {
   EyeOff,
 } from "lucide-react";
 import toast from "react-hot-toast";
+import axiosInstance from "../utils/axiosInstance"; // Use axiosInstance
 
 const Signup = () => {
   const [formData, setFormData] = useState({
@@ -39,10 +39,7 @@ const Signup = () => {
     setError("");
 
     try {
-      const response = await axios.post(
-        "http://localhost:5000/api/auth/register",
-        formData
-      );
+      const response = await axiosInstance.post("/api/auth/register", formData);
       localStorage.setItem("token", response.data.token);
 
       // Show success toast before navigation

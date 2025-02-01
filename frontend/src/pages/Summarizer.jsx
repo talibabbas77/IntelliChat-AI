@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import axios from "axios";
 import Sidebar from "../components/Sidebar"; // Adjust the import path as needed
 import { Loader2, Copy, Edit2, Check } from "lucide-react";
+import axiosInstance from "../utils/axiosInstance";
 
 const Summarizer = () => {
   const [isDarkMode, setIsDarkMode] = useState(() => {
@@ -29,18 +29,10 @@ const Summarizer = () => {
 
     try {
       setLoading(true);
-      const token = localStorage.getItem("token");
 
-      const response = await axios.post(
-        `${import.meta.env.VITE_BASE_URL}/api/ai/summarize`,
-        { text: inputText },
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-            "Content-Type": "application/json",
-          },
-        }
-      );
+      const response = await axiosInstance.post("/api/ai/summarize", {
+        text: inputText,
+      });
 
       setSummary(response.data.summary);
     } catch (err) {

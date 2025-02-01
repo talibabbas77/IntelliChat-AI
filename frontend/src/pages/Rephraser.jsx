@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import axios from "axios";
 import Sidebar from "../components/Sidebar"; // Adjust the import path as needed
 import { Loader2, Copy, Edit2, Check } from "lucide-react";
 import { marked } from "marked"; // Import marked for Markdown parsing

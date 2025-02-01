@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import {
   Loader2,
@@ -10,7 +9,8 @@ import {
   Eye,
   EyeOff,
 } from "lucide-react";
-import toast from "react-hot-toast"; // Remove Toaster import since it's in App.jsx
+import toast from "react-hot-toast";
+import axiosInstance from "../utils/axiosInstance"; // Use axiosInstance
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -33,21 +33,17 @@ const Login = () => {
     setIsLoading(true);
     setError("");
 
-    const loginPromise = axios.post("http://localhost:5000/api/auth/login", {
-      email,
-      password,
-    });
-
     try {
-      const response = await loginPromise;
+      const response = await axiosInstance.post("/api/auth/login", {
+        email,
+        password,
+      });
       localStorage.setItem("token", response.data.token);
 
-      // Show success toast before navigation
       toast.success("Access granted...!", {
         icon: "🎉",
       });
 
-      // Add a small delay before navigation to ensure toast is visible
       setTimeout(() => {
         navigate("/chat");
       }, 100);
@@ -60,11 +56,8 @@ const Login = () => {
     }
   };
 
-  // Rest of the component remains the same until the return statement
-
   return (
     <div className="min-h-screen left-0 right-0 flex flex-col absolute">
-      {/* Home logo button */}
       <button
         onClick={() => navigate("/")}
         className="absolute top-4 left-4 p-2 text-gray-600 hover:text-blue-600 transition-colors duration-200 flex items-center gap-2 rounded-lg cursor-pointer"
@@ -74,7 +67,6 @@ const Login = () => {
       </button>
 
       <div className="flex-1 flex flex-col md:flex-row">
-        {/* Left side: AI bot description - hidden on mobile */}
         <div className="hidden md:flex flex-1 items-center justify-center bg-gradient-to-br from-blue-50 to-indigo-100 p-8">
           <div className="max-w-md text-center">
             <h1 className="text-4xl font-bold text-gray-800 mb-4">
@@ -92,10 +84,8 @@ const Login = () => {
           </div>
         </div>
 
-        {/* Right side: Login form - full width on mobile */}
         <div className="flex-1 flex items-center justify-center bg-white p-4 md:p-8">
           <div className="w-full max-w-md">
-            {/* Mobile-only logo/title */}
             <div className="block md:hidden text-center mb-6">
               <h1 className="text-3xl font-bold text-gray-800">
                 <span className="bg-gradient-to-r from-blue-600 to-[#fc03cf] bg-clip-text text-transparent">
