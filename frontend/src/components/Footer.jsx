@@ -51,7 +51,7 @@ const Footer = () => {
             <Link to="/" className="flex items-center space-x-2">
               {/* Replace MessageCircle with your custom logo */}
               <img
-                src="/logo.png" // Replace with the path to your logo file
+                src="/favicon.ico" // Replace with the path to your logo file
                 alt="Logo"
                 className="h-8 w-8 transition-transform hover:rotate-12"
               />

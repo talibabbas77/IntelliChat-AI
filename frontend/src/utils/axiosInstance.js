@@ -1,7 +1,8 @@
 import axios from "axios";
 
 const axiosInstance = axios.create({
-  baseURL: import.meta.env.VITE_BASE_URL, // Ensure you have VITE_BASE_URL in your .env file
+  baseURL:
+    import.meta.env.VITE_BASE_URL || "https://intellichat-server.vercel.app", // Ensure you have VITE_BASE_URL in your .env file
   headers: {
     "Content-Type": "application/json",
   },

@@ -20,7 +20,7 @@ const Navbar = () => {
           {/* Logo and Brand */}
           <Link to="/" className="flex items-center space-x-2">
             <img
-              src="/logo.png"
+              src="/favicon.ico"
               alt="Logo"
               className="h-8 w-8 transition-transform hover:rotate-12"
             />
