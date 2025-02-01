@@ -1,6 +1,6 @@
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import dotenv from "dotenv";
-import AiTask from "../models/AiTask.js"; // You'll need to create this model
+import aiTask from "../models/aiTask.js";
 
 dotenv.config();
 
@@ -27,7 +27,7 @@ Summary:`;
     const summary = result.response.text();
 
     // Save the task to MongoDB
-    const aiTask = new AiTask({
+    const aiTask = new aiTask({
       user: userId,
       type: "summarization",
       input: text,
@@ -63,7 +63,7 @@ Rephrased Text:`;
     const rephrased = result.response.text();
 
     // Save the task to MongoDB
-    const aiTask = new AiTask({
+    const aiTask = new aiTask({
       user: userId,
       type: "rephrasing",
       input: text,
@@ -99,7 +99,7 @@ export const customBotQuery = async (req, res) => {
     const response = result.response.text();
 
     // Save the task to MongoDB
-    const aiTask = new AiTask({
+    const aiTask = new aiTask({
       user: userId,
       type: "custom-bot",
       input: query,
@@ -117,7 +117,7 @@ export const customBotQuery = async (req, res) => {
 export const getAITaskHistory = async (req, res) => {
   const userId = req.userId;
   try {
-    const tasks = await AiTask.find({ user: userId }).sort({ timestamp: -1 });
+    const tasks = await aiTask.find({ user: userId }).sort({ timestamp: -1 });
     res.json(tasks);
   } catch (err) {
     console.error("Error fetching AI task history:", err);
