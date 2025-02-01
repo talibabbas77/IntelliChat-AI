@@ -25,6 +25,4 @@ const AiTaskSchema = new mongoose.Schema({
   },
 });
 
-const aiTask = mongoose.model("AiTask", AiTaskSchema);
-
-export default aiTask;
+export default mongoose.model("AiTask", AiTaskSchema);
