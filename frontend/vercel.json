@@ -10,8 +10,25 @@
   ],
   "routes": [
     {
+      "src": "^/assets/.*\\.js$",
+      "headers": {
+        "Content-Type": "application/javascript"
+      }
+    },
+    {
       "src": "/(.*)",
       "dest": "/index.html"
+    }
+  ],
+  "headers": [
+    {
+      "source": "/assets/(.*)\\.js$",
+      "headers": [
+        {
+          "key": "Content-Type",
+          "value": "application/javascript"
+        }
+      ]
     }
   ]
 }
